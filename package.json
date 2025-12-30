@@ -6,6 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
+    "hmm" : "prisma generate && next build",
     "start": "next build && next start"
   },
   "dependencies": {
