@@ -1,50 +1,45 @@
+import { ReviewForm } from "@/components/form-ulasan";
+import Header from "@/components/headers";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { handleGetUlasan } from "@/library/data/ulasan";
+import { getGataUsers } from "@/library/data/users";
 import { Phone, MapPin, Clock, Star, Wrench, Droplet, Settings, Gauge } from "lucide-react"
 import Link from "next/link"
 
-export default function SoloMotorPage() {
+export const dynamic = "force-dynamic";
+export default async function SoloMotorPage() {
+  const users = await getGataUsers(); // Example usage of the data fetching function
+  const ulasan = await handleGetUlasan();
+
+  const handleUlasanRating = (n: number) => {
+    const totalRating = ulasan.reduce(
+      (sum, item) => sum + item.rating,
+      0
+    )
+    const averageRating = n > 0 ? totalRating / n : 0
+    const averageRounded = Number(averageRating.toFixed(1))
+    return averageRounded;
+  }
+  const handleRating = () => {
+    const totalRating = ulasan.reduce(
+      (sum, item) => sum + item.rating,
+      0
+    )
+    return ulasan.length > 0 ? totalRating / ulasan.length : 0
+  }
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
-              <Wrench className="w-5 h-5 text-accent-foreground" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-balance">Solo Motor</h1>
-              <p className="text-xs text-muted-foreground">Bengkel Sepeda Motor</p>
-            </div>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="#about" className="text-sm font-medium hover:text-accent-foreground transition-colors">
-              Tentang Kami
-            </Link>
-            <Link href="#services" className="text-sm font-medium hover:text-accent-foreground transition-colors">
-              Layanan
-            </Link>
-            <Link href="#reviews" className="text-sm font-medium hover:text-accent-foreground transition-colors">
-              Ulasan
-            </Link>
-            <Link href="#location" className="text-sm font-medium hover:text-accent-foreground transition-colors">
-              Lokasi
-            </Link>
-            <Button size="sm" asChild>
-              <Link href="#contact">Hubungi Kami</Link>
-            </Button>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 overflow-hidden">
+      <section className="relative h-screen overflow-hidden bg-[url('/bengkel.jpeg')] bg-cover bg-center py-20 md:py-32">
         <div className="absolute inset-0 bg-gradient-to-br from-muted via-background to-muted opacity-50" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-balance">
-              Bengkel Motor Terpercaya di Jakarta Barat
+            <h2 className="text-4xl w-full md:text-6xl font-bold mb-6 text-balance">
+              Bengkel Motor Terpercaya di Sepatan Timur
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 text-pretty leading-relaxed">
               Layanan berkualitas dengan teknisi ramah dan harga terjangkau. Kami siap merawat motor Anda dengan sepenuh
@@ -90,7 +85,7 @@ export default function SoloMotorPage() {
             <p className="text-lg text-muted-foreground text-pretty">Perawatan lengkap untuk motor Anda</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <Card>
+            <Card className="transition-transform duration-300 ease-out hover:scale-105">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
                   <Wrench className="w-6 h-6 text-accent-foreground" />
@@ -102,7 +97,7 @@ export default function SoloMotorPage() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="transition-transform duration-300 ease-out hover:scale-105">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
                   <Gauge className="w-6 h-6 text-accent-foreground" />
@@ -114,7 +109,7 @@ export default function SoloMotorPage() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="transition-transform duration-300 ease-out hover:scale-105">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
                   <Droplet className="w-6 h-6 text-accent-foreground" />
@@ -126,7 +121,7 @@ export default function SoloMotorPage() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="transition-transform duration-300 ease-out hover:scale-105">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
                   <Settings className="w-6 h-6 text-accent-foreground" />
@@ -138,7 +133,7 @@ export default function SoloMotorPage() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="transition-transform duration-300 ease-out hover:scale-105">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
                   <Wrench className="w-6 h-6 text-accent-foreground" />
@@ -150,7 +145,7 @@ export default function SoloMotorPage() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="transition-transform duration-300 ease-out hover:scale-105">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
                   <Settings className="w-6 h-6 text-accent-foreground" />
@@ -173,61 +168,72 @@ export default function SoloMotorPage() {
             <div className="flex items-center justify-center gap-2 mb-2">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`w-6 h-6 ${i < 4 ? "fill-accent text-accent" : "text-muted-foreground"}`} />
+                  <Star key={i}
+                    className={`w-6 h-6 ${i <= Math.round(handleRating()) ? "fill-accent text-accent" : "text-muted-foreground"}`}
+                  />
                 ))}
               </div>
-              <span className="text-2xl font-bold">4.3</span>
+              <span className="text-2xl font-bold">{handleUlasanRating(ulasan.length)}</span>
             </div>
-            <p className="text-muted-foreground">Berdasarkan 87 ulasan</p>
+            <p className="text-muted-foreground">Berdasarkan {ulasan.length} ulasan</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                  ))}
-                </div>
-                <p className="text-foreground mb-4 leading-relaxed">
-                  "Selain teknisi nya yang ramah-ramah, biaya service nya pun ramah kantong 👍🏼👍🏼👍🏼"
-                </p>
-                <p className="text-sm text-muted-foreground">- Pelanggan Solo Motor</p>
-              </CardContent>
-            </Card>
+            {
+              ulasan.map((ulasanItem) => (
+                <Card key={ulasanItem.id}>
+                  <CardContent className="p-6">
+                    <div className="flex mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className={`w-4 h-4 ${i < ulasanItem?.rating ? "fill-accent text-accent" : "text-muted-foreground"}`} />
+                      ))}
+                    </div>
+                    <p className="text-foreground mb-4 leading-relaxed">
+                      "{ulasanItem?.komentar}"
+                    </p>
+                    <div className="w-full flex justify-start items-start ">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-slate-400"><path d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z" fill="currentColor" fillOpacity="0.25"></path><circle cx="12" cy="10" r="4" fill="currentColor"></circle><path fillRule="evenodd" clipRule="evenodd" d="M18.2209 18.2462C18.2791 18.3426 18.2613 18.466 18.1795 18.5432C16.5674 20.0662 14.3928 21 12 21C9.60728 21 7.43264 20.0663 5.82057 18.5433C5.73877 18.466 5.72101 18.3427 5.77918 18.2463C6.94337 16.318 9.29215 15 12.0001 15C14.7079 15 17.0567 16.3179 18.2209 18.2462Z" fill="currentColor"></path></svg>
+                      <p className="text-sm text-muted-foreground w-full mt-2"> {ulasanItem?.nama} - {ulasanItem?.kendaraan}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))
+            }
 
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${i < 4 ? "fill-accent text-accent" : "text-muted-foreground"}`}
-                    />
-                  ))}
-                </div>
-                <p className="text-foreground mb-4 leading-relaxed">
-                  "Pelayanan cepat dan hasil kerja memuaskan. Motor saya jadi lebih nyaman dikendarai!"
-                </p>
-                <p className="text-sm text-muted-foreground">- Pelanggan Solo Motor</p>
-              </CardContent>
-            </Card>
 
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${i < 4 ? "fill-accent text-accent" : "text-muted-foreground"}`}
-                    />
-                  ))}
-                </div>
-                <p className="text-foreground mb-4 leading-relaxed">
-                  "Bengkel langganan saya. Teknisinya jujur dan tidak memaksakan servis yang tidak perlu."
-                </p>
-                <p className="text-sm text-muted-foreground">- Pelanggan Solo Motor</p>
-              </CardContent>
-            </Card>
+            {/* <Card>
+                <CardContent className="p-6">
+                  <div className="flex mb-3">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${i < 4 ? "fill-accent text-accent" : "text-muted-foreground"}`}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-foreground mb-4 leading-relaxed">
+                    "Pelayanan cepat dan hasil kerja memuaskan. Motor saya jadi lebih nyaman dikendarai!"
+                  </p>
+                  <p className="text-sm text-muted-foreground">- Pelanggan Solo Motor</p>
+                </CardContent>
+              </Card>
+                    
+  
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex mb-3">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${i < 4 ? "fill-accent text-accent" : "text-muted-foreground"}`}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-foreground mb-4 leading-relaxed">
+                    "Bengkel langganan saya. Teknisinya jujur dan tidak memaksakan servis yang tidak perlu."
+                  </p>
+                  <p className="text-sm text-muted-foreground">- Pelanggan Solo Motor</p>
+                </CardContent>
+              </Card> */}
           </div>
           <div className="text-center mt-8">
             <Button variant="outline" size="lg">
@@ -236,6 +242,74 @@ export default function SoloMotorPage() {
           </div>
         </div>
       </section>
+
+      {/* Gallery Section */}
+      <section id="gallery" className="py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Galeri Kami</h2>
+            <p className="text-lg text-muted-foreground text-pretty">Lihat fasilitas bengkel dan hasil kerja kami</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+            <div className="relative aspect-square overflow-hidden rounded-lg border border-border group">
+              <img
+                src="/motorcycle-workshop-interior-with-tools-and-bikes.jpg"
+                alt="Interior bengkel Solo Motor"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div className="relative aspect-square overflow-hidden rounded-lg border border-border group">
+              <img
+                src="/mechanic-working-on-motorcycle-engine-repair.jpg"
+                alt="Teknisi sedang memperbaiki motor"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div className="relative aspect-square overflow-hidden rounded-lg border border-border group">
+              <img
+                src="/motorcycle-oil-change-service.jpg"
+                alt="Servis ganti oli motor"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div className="relative aspect-square overflow-hidden rounded-lg border border-border group">
+              <img
+                src="/clean-and-organized-motorcycle-workshop.jpg"
+                alt="Area kerja bengkel yang rapi"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div className="relative aspect-square overflow-hidden rounded-lg border border-border group">
+              <img
+                src="/motorcycle-tire-replacement-service.jpg"
+                alt="Penggantian ban motor"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div className="relative aspect-square overflow-hidden rounded-lg border border-border group">
+              <img
+                src="/satisfied-customer-with-repaired-motorcycle.jpg"
+                alt="Motor pelanggan yang telah selesai diperbaiki"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+            {/* Review Form Section */}
+      <section className="py-16 md:py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Bagikan Pengalaman Anda</h2>
+            <p className="text-lg text-muted-foreground text-pretty">
+              Kami sangat menghargai feedback dari pelanggan setia kami
+            </p>
+          </div>
+          <ReviewForm />
+        </div>
+      </section>
+
 
       {/* Location Section */}
       <section id="location" className="py-16 md:py-24">
@@ -255,7 +329,7 @@ export default function SoloMotorPage() {
                       <div>
                         <p className="font-medium mb-1">Alamat</p>
                         <p className="text-muted-foreground leading-relaxed text-pretty">
-                          Jl. Belimbing Raya, RT.1/RW.11, Kalideres, Kec. Kalideres, Kota Jakarta Barat, Daerah Khusus
+                          Jl. Belimbing Raya, RT.1/RW.11, Kalideres, Kec. Kalideres, Kota Sepatan Timur, Daerah Khusus
                           Ibukota Jakarta 11840
                         </p>
                       </div>
@@ -335,7 +409,7 @@ export default function SoloMotorPage() {
             <div>
               <h3 className="font-semibold mb-4">Solo Motor</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Bengkel motor terpercaya di Jakarta Barat dengan layanan profesional dan harga terjangkau.
+                Bengkel motor terpercaya di Sepatan Timur dengan layanan profesional dan harga terjangkau.
               </p>
             </div>
             <div>
@@ -375,7 +449,7 @@ export default function SoloMotorPage() {
             <div>
               <h3 className="font-semibold mb-4">Kontak</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>Kalideres, Jakarta Barat</li>
+                <li>Kalideres, Sepatan Timur</li>
                 <li>Buka: 10:00 - 17:00</li>
                 <li>
                   <a href="tel:+62123456789" className="hover:text-foreground transition-colors">

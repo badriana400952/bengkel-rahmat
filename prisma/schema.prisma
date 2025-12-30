@@ -19,3 +19,12 @@ model User {
   email     String   @unique
   name      String?
 }
+
+model Ulasan {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  nama      String
+  rating    Int
+  komentar  String
+  kendaraan  String
+}
