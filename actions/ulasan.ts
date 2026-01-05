@@ -1,6 +1,6 @@
 'use server'
 import { revalidatePath } from "next/cache";
-import { prisma } from "../prisma"
+import { prisma } from "../lib/prisma"
 import { z } from "zod"
 import { redirect } from "next/navigation";
 const ulasanSchema = z.object({
@@ -21,13 +21,11 @@ export const handleGetUlasan = async () => {
 
 export const handlePostUlasan = async (formData:FormData ): Promise<any> => {
     const data = ulasanSchema.safeParse(Object.fromEntries(formData.entries()))
-    console.log("ini",Object.fromEntries(formData.entries()))
     if (!data.success) {
         console.log(data.error.format());
         return;
     }
     try {
-        console.log("data",data.data)
        await prisma.ulasan.create({
             data: {
                 nama: data.data.nama,

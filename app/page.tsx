@@ -1,16 +1,17 @@
+import { GetGalleryImages } from "@/actions/galery";
+import { handleGetUlasan } from "@/actions/ulasan";
+import { getUser } from "@/actions/users";
 import { ReviewForm } from "@/components/form-ulasan";
+import GaleryPage from "@/components/galeryPage";
 import Header from "@/components/headers";
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { handleGetUlasan } from "@/library/data/ulasan";
-import { getGataUsers } from "@/library/data/users";
-import { Phone, MapPin, Clock, Star, Wrench, Droplet, Settings, Gauge } from "lucide-react"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Clock, MapPin, Phone, Star } from "lucide-react";
+import Link from "next/link";
 
-export const dynamic = "force-dynamic";
-export default async function SoloMotorPage() {
-  const users = await getGataUsers(); // Example usage of the data fetching function
+export default async function RahmatMotorPage() {
   const ulasan = await handleGetUlasan();
+  const galeri = await GetGalleryImages();
 
   const handleUlasanRating = (n: number) => {
     const totalRating = ulasan.reduce(
@@ -29,6 +30,42 @@ export default async function SoloMotorPage() {
     return ulasan.length > 0 ? totalRating / ulasan.length : 0
   }
   return (
+    <>
+  {<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "AutoRepair",
+      name: "Rahmat Motor",
+      image: "https://rahmat-motor.vercel.app/busi.jpg",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "VJQ8+PGQ, Gempol Sari",
+        addressLocality: "Sepatan Timur",
+        addressRegion: "Banten",
+        postalCode: "15520",
+        addressCountry: "ID",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: -6.118,
+        longitude: 106.602,
+      },
+      openingHours: "Mo-Su 10:00-17:00",
+      priceRange: "$$",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.5",
+        reviewCount: "4",
+      },
+      sameAs: [
+        "https://wa.me/6285887535612",
+      ],
+    }),
+  }}
+/>
+}
     <div className="min-h-screen">
       {/* Header */}
       <Header />
@@ -67,9 +104,9 @@ export default async function SoloMotorPage() {
       <section id="about" className="py-16 md:py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">Tentang Solo Motor</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">Tentang Rahmat Motor</h2>
             <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
-              Di Solo Motor, kami spesialisasi dalam perbaikan dan perawatan sepeda motor. Dengan tim teknisi yang
+              Di Rahmat Motor, kami spesialisasi dalam perbaikan dan perawatan sepeda motor. Dengan tim teknisi yang
               berpengalaman dan ramah, kami menyediakan layanan yang dapat diandalkan dan terjangkau untuk memastikan
               motor Anda dalam kondisi terbaik. Kepuasan pelanggan adalah prioritas utama kami.
             </p>
@@ -88,11 +125,35 @@ export default async function SoloMotorPage() {
             <Card className="transition-transform duration-300 ease-out hover:scale-105">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
-                  <Wrench className="w-6 h-6 text-accent-foreground" />
+                  <img src="/engine.png" alt="engine" className="w-12 h-12 text-accent-foreground rounded-xl" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Perbaikan Motor</h3>
+                <h3 className="text-xl font-semibold mb-2">Service besar</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Perbaikan dan diagnosa lengkap untuk semua jenis kerusakan motor Anda
+                  Perawatan menyeluruh pada mesin dan komponen motor untuk mengembalikan performa agar kembali optimal.
+                </p>
+              </CardContent>
+            </Card>
+
+
+            <Card className="transition-transform duration-300 ease-out hover:scale-105">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
+                  <img src="/sedang.png" alt="sedang" className="w-9 h-9 text-accent-foreground rounded-xl" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Service Sedang</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Perawatan tingkat menengah dengan pengecekan dan penyetelan komponen penting mesin.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="transition-transform duration-300 ease-out hover:scale-105">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
+                  <img src="/kecil.png" alt="kecil" className="w-w-9 h-9 text-accent-foreground rounded-xl" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Service Kecil</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Perawatan ringan untuk motor harian agar tetap nyaman, aman, dan siap digunakan.
                 </p>
               </CardContent>
             </Card>
@@ -100,11 +161,11 @@ export default async function SoloMotorPage() {
             <Card className="transition-transform duration-300 ease-out hover:scale-105">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
-                  <Gauge className="w-6 h-6 text-accent-foreground" />
+                  <img src="/karbu.png" alt="karbu" className="w-12 h-12 text-accent-foreground rounded-xl" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Ganti Ban</h3>
+                <h3 className="text-xl font-semibold mb-2">Tune Up Karburator</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Penggantian ban berkualitas dengan harga kompetitif
+                  Pembersihan dan penyetelan karburator agar tarikan lebih halus dan bahan bakar lebih irit.
                 </p>
               </CardContent>
             </Card>
@@ -112,11 +173,23 @@ export default async function SoloMotorPage() {
             <Card className="transition-transform duration-300 ease-out hover:scale-105">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
-                  <Droplet className="w-6 h-6 text-accent-foreground" />
+                  <img src="/injektor.png" alt="injektor" className="w-12 h-12 text-accent-foreground rounded-xl" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Tune Up Injektor</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Pembersihan sistem injeksi untuk menjaga performa mesin tetap maksimal dan stabil.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="transition-transform duration-300 ease-out hover:scale-105">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
+                  <img src="/oli.png" alt="oli" className="w-9 h-9 text-accent-foreground rounded-xl" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Ganti Oli</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Servis ganti oli rutin untuk performa mesin optimal
+                  Penggantian oli mesin secara rutin untuk menjaga keawetan mesin dan performa tetap prima.
                 </p>
               </CardContent>
             </Card>
@@ -124,35 +197,23 @@ export default async function SoloMotorPage() {
             <Card className="transition-transform duration-300 ease-out hover:scale-105">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
-                  <Settings className="w-6 h-6 text-accent-foreground" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Suspensi & Rem</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Perbaikan dan penyetelan sistem suspensi dan rem
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="transition-transform duration-300 ease-out hover:scale-105">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
-                  <Wrench className="w-6 h-6 text-accent-foreground" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Modifikasi Custom</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Modifikasi sesuai keinginan untuk tampilan motor yang unik
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="transition-transform duration-300 ease-out hover:scale-105">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
-                  <Settings className="w-6 h-6 text-accent-foreground" />
+                  <img src="/berkala.png" alt="berkala" className="w-9 h-9 text-accent-foreground rounded-xl" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Servis Berkala</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Perawatan rutin untuk menjaga performa motor tetap prima
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="transition-transform duration-300 ease-out hover:scale-105">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
+                  <img src="/dll.png" alt="dll" className="w-9 h-9 text-accent-foreground rounded-xl" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">DLL</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Layanan lainnya seperti pengecekan rem, rantai, suspensi, kelistrikan, dan servis tambahan lainnya.
                 </p>
               </CardContent>
             </Card>
@@ -179,7 +240,7 @@ export default async function SoloMotorPage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {
-              ulasan.map((ulasanItem) => (
+              ulasan.slice(0, 3).map((ulasanItem) => (
                 <Card key={ulasanItem.id}>
                   <CardContent className="p-6">
                     <div className="flex mb-3">
@@ -198,106 +259,21 @@ export default async function SoloMotorPage() {
                 </Card>
               ))
             }
-
-
-            {/* <Card>
-                <CardContent className="p-6">
-                  <div className="flex mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-4 h-4 ${i < 4 ? "fill-accent text-accent" : "text-muted-foreground"}`}
-                      />
-                    ))}
-                  </div>
-                  <p className="text-foreground mb-4 leading-relaxed">
-                    "Pelayanan cepat dan hasil kerja memuaskan. Motor saya jadi lebih nyaman dikendarai!"
-                  </p>
-                  <p className="text-sm text-muted-foreground">- Pelanggan Solo Motor</p>
-                </CardContent>
-              </Card>
-                    
-  
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-4 h-4 ${i < 4 ? "fill-accent text-accent" : "text-muted-foreground"}`}
-                      />
-                    ))}
-                  </div>
-                  <p className="text-foreground mb-4 leading-relaxed">
-                    "Bengkel langganan saya. Teknisinya jujur dan tidak memaksakan servis yang tidak perlu."
-                  </p>
-                  <p className="text-sm text-muted-foreground">- Pelanggan Solo Motor</p>
-                </CardContent>
-              </Card> */}
           </div>
           <div className="text-center mt-8">
-            <Button variant="outline" size="lg">
-              Lihat Semua Ulasan
+            <Button variant="outline" size="lg" asChild>
+              <Link href="/ulasan">
+                Lihat Semua Ulasan
+              </Link>
             </Button>
           </div>
         </div>
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery" className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Galeri Kami</h2>
-            <p className="text-lg text-muted-foreground text-pretty">Lihat fasilitas bengkel dan hasil kerja kami</p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
-            <div className="relative aspect-square overflow-hidden rounded-lg border border-border group">
-              <img
-                src="/motorcycle-workshop-interior-with-tools-and-bikes.jpg"
-                alt="Interior bengkel Solo Motor"
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="relative aspect-square overflow-hidden rounded-lg border border-border group">
-              <img
-                src="/mechanic-working-on-motorcycle-engine-repair.jpg"
-                alt="Teknisi sedang memperbaiki motor"
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="relative aspect-square overflow-hidden rounded-lg border border-border group">
-              <img
-                src="/motorcycle-oil-change-service.jpg"
-                alt="Servis ganti oli motor"
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="relative aspect-square overflow-hidden rounded-lg border border-border group">
-              <img
-                src="/clean-and-organized-motorcycle-workshop.jpg"
-                alt="Area kerja bengkel yang rapi"
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="relative aspect-square overflow-hidden rounded-lg border border-border group">
-              <img
-                src="/motorcycle-tire-replacement-service.jpg"
-                alt="Penggantian ban motor"
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="relative aspect-square overflow-hidden rounded-lg border border-border group">
-              <img
-                src="/satisfied-customer-with-repaired-motorcycle.jpg"
-                alt="Motor pelanggan yang telah selesai diperbaiki"
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
-            {/* Review Form Section */}
+      <GaleryPage galeri={galeri} />
+      {/* Review Form Section */}
       <section className="py-16 md:py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -329,8 +305,7 @@ export default async function SoloMotorPage() {
                       <div>
                         <p className="font-medium mb-1">Alamat</p>
                         <p className="text-muted-foreground leading-relaxed text-pretty">
-                          Jl. Belimbing Raya, RT.1/RW.11, Kalideres, Kec. Kalideres, Kota Sepatan Timur, Daerah Khusus
-                          Ibukota Jakarta 11840
+                          VJQ8+PGQ, Gempol Sari, Kec. Sepatan Tim., Kabupaten Tangerang, Banten 15520
                         </p>
                       </div>
                     </div>
@@ -345,7 +320,7 @@ export default async function SoloMotorPage() {
                     <div className="pt-4">
                       <Button className="w-full" size="lg" asChild>
                         <a
-                          href="https://www.google.com/maps/dir/?api=1&destination=Jl.+Belimbing+Raya,+RT.1/RW.11,+Kalideres,+Jakarta+Barat"
+                          href="https://www.google.com/maps?q=-6.11048,106.6161183&z=17&hl=id"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -360,15 +335,17 @@ export default async function SoloMotorPage() {
             </div>
             <div className="h-[400px] md:h-auto rounded-lg overflow-hidden border border-border">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.9826764!2d106.7!3d-6.15!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMDknMDAuMCJTIDEwNsKwNDInMDAuMCJF!5e0!3m2!1sen!2sid!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.9!2d106.6161183!3d-6.11048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMDYnMzcuNyJTIDEwNsKwMzYnNTguMCJF!5e0!3m2!1sid!2sid!4v1733730000000"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Solo Motor Location"
+                title="Lokasi Koordinat"
               />
+
+
             </div>
           </div>
         </div>
@@ -384,13 +361,13 @@ export default async function SoloMotorPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
-                <a href="tel:+62123456789">
+                <a href="tel:+6285887535612">
                   <Phone className="w-4 h-4 mr-2" />
                   Telepon Sekarang
                 </a>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <a href="https://wa.me/62123456789" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/6285887535612" target="_blank" rel="noopener noreferrer">
                   <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
                   </svg>
@@ -407,7 +384,7 @@ export default async function SoloMotorPage() {
         <div className="container mx-auto px-4">
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-semibold mb-4">Solo Motor</h3>
+              <h3 className="font-semibold mb-4">Rahmat Motor</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Bengkel motor terpercaya di Sepatan Timur dengan layanan profesional dan harga terjangkau.
               </p>
@@ -452,7 +429,7 @@ export default async function SoloMotorPage() {
                 <li>Kalideres, Sepatan Timur</li>
                 <li>Buka: 10:00 - 17:00</li>
                 <li>
-                  <a href="tel:+62123456789" className="hover:text-foreground transition-colors">
+                  <a href="tel:+6285887535612" className="hover:text-foreground transition-colors">
                     +62 123 456 789
                   </a>
                 </li>
@@ -460,10 +437,11 @@ export default async function SoloMotorPage() {
             </div>
           </div>
           <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} Solo Motor. Semua hak dilindungi.</p>
+            <p>&copy; {new Date().getFullYear()} Rahmat Motor. Semua hak dilindungi.</p>
           </div>
         </div>
       </footer>
     </div>
+        </>
   )
 }
