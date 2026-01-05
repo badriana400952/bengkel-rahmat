@@ -1,18 +1,12 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import { Button } from './ui/button'
 import Link from 'next/link'
+import { useGlobal } from './global-context'
+import { Button } from './ui/button'
 
 const GaleryPage = ({ galeri }: { galeri: any }) => {
-    const [users, setUsers] = useState<any>(null);
+  const { isLogin, setIsLogin } = useGlobal();
 
-    useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-            setUsers(JSON.parse(storedUser));
-        }
-    }, []);
-    console.log(users, "users galerysssssssssssssss")
+    
     return (
         <section id="gallery" className="py-16 md:py-24">
             <div className="container mx-auto px-4">
@@ -41,7 +35,7 @@ const GaleryPage = ({ galeri }: { galeri: any }) => {
                         </Link>
                     </Button>
                     {
-                        users?.name === "rahmat" && (<Button variant="outline" size="lg" asChild>
+                       isLogin && (<Button variant="outline" size="lg" asChild>
                             <Link href="/galery">
                                 Tambah Image Galeri
                             </Link>

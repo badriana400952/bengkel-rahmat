@@ -4,21 +4,25 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Wrench, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useGlobal } from "./global-context";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+    const {  setIsLogin } = useGlobal();
   const [users, setUsers] = useState<any>(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUsers(JSON.parse(storedUser));
+      setIsLogin(true); // Set isLogin to true if user exists
     }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("user"); // hapus storage
-    setUsers(null);                  // 🔥 trigger re-render
+    setUsers(null);   
+    setIsLogin(false);               // 🔥 trigger re-render
     setOpen(false);                  // tutup mobile menu
   };
 

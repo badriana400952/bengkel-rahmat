@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { AlertProvider } from "@/components/ui/alert-provider"
+import { GlobalProvider } from "@/components/global-context"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -41,7 +42,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Rahmat Motor" }],
   creator: "Rahmat Motor",
   publisher: "Rahmat Motor",
-
+  verification: {
+    google: "googlee1f94fb2bf9c6720",
+  },
   robots: {
     index: true,
     follow: true,
@@ -97,7 +100,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning className={`font-sans antialiased`}>
-         <AlertProvider>{children}</AlertProvider>
+        <GlobalProvider>
+          <AlertProvider>{children}</AlertProvider>
+        </GlobalProvider>
         <Analytics />
       </body>
     </html>
