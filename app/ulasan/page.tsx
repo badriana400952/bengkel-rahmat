@@ -1,13 +1,13 @@
-import Header from '@/components/headers'
-import { Card, CardContent } from '@/components/ui/card'
 import { handleGetUlasan } from '@/actions/ulasan';
-import { Star } from 'lucide-react'
+import HeaderNoMenu from '@/components/headersNoMenu';
+import { Card, CardContent } from '@/components/ui/card';
+import { Star } from 'lucide-react';
 
 const Ulasan = async () => {
   const ulasan = await handleGetUlasan();
   return (
     <div>
-          <Header />
+          <HeaderNoMenu />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mt-4">
             {
               ulasan.map((ulasanItem) => (
