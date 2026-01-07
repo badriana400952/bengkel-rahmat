@@ -9,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Clock, MapPin, Phone, Star } from "lucide-react";
 import Link from "next/link";
 
-export default async function RahmatMotorPage() {
+export default async function RamahMotorPage() {
   const ulasan = await handleGetUlasan();
   const galeri = await GetGalleryImages();
 
@@ -37,7 +37,7 @@ export default async function RahmatMotorPage() {
     __html: JSON.stringify({
       "@context": "https://schema.org",
       "@type": "AutoRepair",
-      name: "Rahmat Motor",
+      name: "Ramah Motor",
       image: "https://rahmat-motor.vercel.app/busi.jpg",
       address: {
         "@type": "PostalAddress",
@@ -104,9 +104,9 @@ export default async function RahmatMotorPage() {
       <section id="about" className="py-16 md:py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">Tentang Rahmat Motor</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">Tentang Ramah Motor</h2>
             <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
-              Di Rahmat Motor, kami spesialisasi dalam perbaikan dan perawatan sepeda motor. Dengan tim teknisi yang
+              Di Ramah Motor, kami spesialisasi dalam perbaikan dan perawatan sepeda motor. Dengan tim teknisi yang
               berpengalaman dan ramah, kami menyediakan layanan yang dapat diandalkan dan terjangkau untuk memastikan
               motor Anda dalam kondisi terbaik. Kepuasan pelanggan adalah prioritas utama kami.
             </p>
@@ -384,7 +384,7 @@ export default async function RahmatMotorPage() {
         <div className="container mx-auto px-4">
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-semibold mb-4">Rahmat Motor</h3>
+              <h3 className="font-semibold mb-4">Ramah Motor</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Bengkel motor terpercaya di Sepatan Timur dengan layanan profesional dan harga terjangkau.
               </p>
@@ -437,7 +437,7 @@ export default async function RahmatMotorPage() {
             </div>
           </div>
           <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} Rahmat Motor. Semua hak dilindungi.</p>
+            <p>&copy; {new Date().getFullYear()} Ramah Motor. Semua hak dilindungi. authors by Badriana</p>
           </div>
         </div>
       </footer>

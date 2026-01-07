@@ -36,7 +36,7 @@
               <Wrench className="w-5 h-5 text-accent-foreground" />
             </div>
             <div>
-              <h1 className="text-xl font-bold">Rahmat Motor </h1>
+              <h1 className="text-xl font-bold">Ramah Motor </h1>
               <p className="text-xs text-muted-foreground">
                 Bengkel Sepeda Motor
               </p>
@@ -54,7 +54,7 @@
               <Link href="#contact">Hubungi Kami</Link>
             </Button>
 
-            {users?.name === "rahmat" && (
+            {users?.name === "Ramah" && (
               <Button
                 size="sm"
                 onClick={handleLogout}
@@ -89,7 +89,7 @@
                 </Link>
               </Button>
 
-              {users?.name === "rahmat" && (
+              {users?.name === "Ramah" && (
                 <Button
                   size="sm"
                   onClick={handleLogout}
