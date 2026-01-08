@@ -8,9 +8,9 @@
 
   export default function Header() {
     const [open, setOpen] = useState(false);
-      const {  setIsLogin } = useGlobal();
+      const { isLogin, setIsLogin } = useGlobal();
     const [users, setUsers] = useState<any>(null);
-
+console.log('dddddddddddddd',users?.name)
     useEffect(() => {
       const storedUser = localStorage.getItem("user");
       if (storedUser) {
@@ -54,7 +54,7 @@
               <Link href="#contact">Hubungi Kami</Link>
             </Button>
 
-            {users?.name === "Ramah" && (
+            {users?.name === "rahmat" && (
               <Button
                 size="sm"
                 onClick={handleLogout}
@@ -89,7 +89,7 @@
                 </Link>
               </Button>
 
-              {users?.name === "Ramah" && (
+              {users?.name === "rahmat" && (
                 <Button
                   size="sm"
                   onClick={handleLogout}
